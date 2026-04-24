@@ -72,8 +72,34 @@
     }
 
     .container span {
-        color: rgb(236, 223, 223);
+        color: rgb(255, 255, 255);
         font-size: 30px;
+    }
+
+    .estatisticas {
+        display: flex;
+        justify-content: center;
+        gap: 150px;
+        align-items: center;
+        flex-direction: row;
+
+    }
+
+    .estatisticas span {
+        color: aqua;
+        font-size: 50px;
+    }
+
+    .legenda{
+        display: flex;
+        justify-content: center;
+        gap: 150px;
+        align-items: center;
+        flex-direction: row;
+    }
+    .legenda a {
+        color: white;
+        font-size: 25px;
     }
 </style>
 
@@ -96,7 +122,19 @@
         <span>La Pulga ° D10S ° EL Messías</span>
     </div><br>
 
-    <div></div>
+    <div class="estatisticas">
+        <span>+1000 </span>
+        <span>+900 </span>
+        <span>+400 </span>
+        <span>8 </span><br>
+    </div>
+
+    <div class="legenda">
+            <a>Partidas</a>
+            <a>Gols</a>
+            <a>Assistências</a>
+            <a>Bolas de Ouro</a>
+        </div>
 </body>
 
 </html>

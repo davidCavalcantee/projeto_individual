@@ -1,0 +1,133 @@
+ body {
+        background-color: #0a1f64;
+        
+    }
+    body h1{
+        color: white;
+        justify-self: center;
+        font-size: 40px;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #06123a;
+        border-bottom: 1px solid #1818b6;
+        width: cover;
+    }
+
+    header img {
+        /* display: flex;
+        justify-content: flex-start; */
+        object-fit: cover;
+        width: 10%;
+        height: 10%;
+    }
+
+    .menu {
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        gap: 30px;
+        margin-right: 5%;
+
+    }
+
+    .menu li {
+        display: inline-block;
+    }
+
+    .menu a {
+        text-decoration: none;
+        color: rgb(201, 197, 197);
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .botaoCadastro {
+        background-color: #1818b6;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .container {
+        background-image: url(lionel-messi-r4aidmii2f4cabed.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container h1 {
+        color: #0e062e;
+        font-size: 100px;
+    }
+
+    .container span {
+        color: rgb(7, 8, 46);
+        font-size: 30px;
+    }
+
+    .estatisticas {
+        background-color: #06123a;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: row;
+
+    }
+
+    .estatisticas a {
+        color: aqua;
+        font-size: 50px;
+    }
+    .estatisticas span {
+        color: white;
+        font-size: 20px;
+    }
+
+    .cardBiografia{
+        display: flex;
+        justify-self: center;
+        border-radius: 20px;
+        background-color:#08184b;
+        height: 400px;
+        width: 1000px;
+        padding: 40px;
+        
+    }
+    .cardBiografia a{
+        flex-grow: 0;
+        justify-self: center;
+        align-self:self-end;
+        color: white;
+        font-size: 23px;
+    }
+    .cardBiografia span{
+        position: absolute;
+        white-space: nowrap;
+        justify-content: flex-start;
+        left: 15%;
+        color: aqua;
+        font-size: 23px;
+    }
+    .iconeBiografiaCalendario{
+        background-image: url(2iconeCalendario.png);
+        width: 24px;
+        height: 24px;
+        left: 12%;
+        position: absolute;
+    }
+    .iconeBiografiaLocalizacao{
+        background-image: url(2iconeLocalizacao.png);
+        width: 24px;
+        height: 24px;
+        left: 12%;
+        margin-top: 2.3%;
+        position: absolute;
+    }

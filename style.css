@@ -321,3 +321,54 @@
     .footer span{
         color: #4294c4;
     }
+    .containerLoginCadastro{
+        margin-top: 80px;
+        display: flex;
+        border: 2px solid aqua;
+        background-color: #06123a;
+        justify-self: center;
+        border-radius: 20px;
+        padding: 2%;
+        width:500px;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+        gap: 10px;
+    }
+    .containerLoginCadastro input{
+        justify-self: center;
+        width: 400px;
+        border-radius: 20px;
+        height: 40px;
+    }
+    .containerLoginCadastro h1{
+        justify-self: flex-start;
+        color: #4294c4;
+    }
+    .containerLoginCadastro span{
+        
+        color: aqua;
+    }
+    .containerLoginCadastro a{
+        color: rgb(255, 255, 255);
+    }
+    .containerLoginCadastro button{
+        background-color: #1818b6;
+        border-radius: 10px;
+        padding: 2%;
+        border: 2px solid white;
+        color: white;
+    }
+    .fundoLoginCadastro{
+        margin-top: 40px;
+        padding: 5%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color:#0a1f64;
+        height: 350px;
+        margin-bottom: 200px;
+    }
+    .containerLoginCadastro div{
+        color: red;
+    }

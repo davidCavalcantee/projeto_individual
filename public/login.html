@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <img src="assets/icones/logoMessi.png">
+
+        <div class="menu">
+            <li><a href="">Quiz</a></li>
+            <li><a href="index.html">Home</a></li>
+        </div>
+    </header>
+    <div class="fundoLoginCadastro">
+    <div class="containerLoginCadastro">
+        <h1>Fazer login</h1>
+        <input type="text" id="input_email" placeholder="*Digite seu email - example@hotmail.com">
+        <input type="password" id="input_senha" placeholder="*Digite sua senha">
+        <button onclick="logar()">Continuar</button>
+        <span>Não possui conta? <a href="cadastro.html">Clique Aqui para criar uma conta</a></span>
+    </div>
+    </div>
+
+    <footer>
+        <div class="footer">
+            <a>Uma Homenagem para Lionel Messi - O melhor jogador da História - "THE GOAT"</a>
+            <span> © 2026 -  David Lima Cavalcante</span>
+        </div>
+    </footer>
+</body>
+</html>
+<script>
+     function logar() {
+        // aguardar();
+
+        var email = input_email.value;
+        var senha = input_senha.value;
+
+        if (email == "" || senha == "") {
+            // cardErro.style.display = "block"
+            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            // finalizarAguardar();
+            return false;
+        }
+        else {
+            // setInterval(sumirMensagem, 5000)
+        }
+
+        // console.log("FORM LOGIN: ", email);
+        // console.log("FORM SENHA: ", senha);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                    setTimeout(function () {
+                        window.location = "dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none"
+    // }
+</script>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/sessao.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -36,14 +37,14 @@
 <script>
      function logar() {
         // aguardar();
-
         var email = input_email.value;
         var senha = input_senha.value;
 
         if (email == "" || senha == "") {
             // cardErro.style.display = "block"
-            // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            //mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             // finalizarAguardar();
+            alert('hhhhhhh')
             return false;
         }
         else {
@@ -74,20 +75,20 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    // sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
-                    setTimeout(function () {
-                        window.location = "dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
+                    //  sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+                   // apenas para exibir o loading
 
                 });
-
+                 setTimeout(function () {
+                        window.location = "index.html";
+                    }, 750); 
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    // finalizarAguardar(texto);
                 });
             }
 

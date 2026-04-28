@@ -261,7 +261,7 @@
         height: 1000px;
     }
     .containerImagemBallonDor{
-        background-image: url("../  assets/icones/ballon.jpg");
+        background-image: url(../assets/icones/ballon.jpg);
         border-radius: 20px;
         display: flex;
         width: 1200px;

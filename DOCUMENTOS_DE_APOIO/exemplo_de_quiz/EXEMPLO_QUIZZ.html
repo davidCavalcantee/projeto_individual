@@ -76,31 +76,88 @@
     const listaDeQuestoes = [
 
         {
-            pergunta: "Qual mês tem 30 dias?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
+            pergunta: "Em que ano o Messi ganhou sua primeira Bola de Ouro?",
+            alternativaA: "2008",
+            alternativaB: "2009",
+            alternativaC: "2010",
+            alternativaD: "2011",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            pergunta: "Qual é o nome completo do Messi?",
+            alternativaA: "Lionel Martinez Messi",
+            alternativaB: "Leo Messi",
+            alternativaC: "Lionel Andrés Messi Cuccittini",
+            alternativaD: "Lionel Messi",
             alternativaCorreta: "alternativaC"
         },
 
         {
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
+            pergunta: "Quantos Filhos tem o Messi?",
+            alternativaA: "Um",
+            alternativaB: "Dois",
+            alternativaC: "Três",
+            alternativaD: "Quatro",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            pergunta: "Contra qual equipe Lionel Messi marcou seu gol de número 500?",
+            alternativaA: "Real Madrid",
+            alternativaB: "Valencia",
+            alternativaC: "Getafe",
+            alternativaD: "PSG",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            pergunta: "Por qual time messi estrou profissionalmente?",
+            alternativaA: "Newell's Old Boys",
+            alternativaB: "River Plate",
+            alternativaC: "Inter Miami",
+            alternativaD: "Barcelona",
             alternativaCorreta: "alternativaD"
         },
-
         {
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
+            pergunta: "Quantos gols Messi marcou na copa de 2022?",
+            alternativaA: "7",
+            alternativaB: "6",
+            alternativaC: "5",
+            alternativaD: "4",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            pergunta: "Quem é o Jogador que mais deu assistências ao Messi?",
+            alternativaA: "Daniel Alves",
+            alternativaB: "Iniesta",
+            alternativaC: "Xavi",
+            alternativaD: "Luis Suárez",
+            alternativaCorreta: "alternativaD"
+        },
+        {
+            pergunta: "Contra qual equipe Messi marcou o seu primeiro gol ?",
+            alternativaA: "Getafe",
+            alternativaB: "Albacete",
+            alternativaC: "Valencia",
+            alternativaD: "Liverpool",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            pergunta: "Em que ano Messi estreou com a camisa da Argentina?",
+            alternativaA: "2003",
+            alternativaB: "2004",
+            alternativaC: "2005",
+            alternativaD: "2006",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            pergunta: "Quantas vezes Messi já foi o jogador que mais fez gols em um ano?",
+            alternativaA: "Três",
+            alternativaB: "Quatro",
+            alternativaC: "Cinco",
+            alternativaD: "Seis",
             alternativaCorreta: "alternativaD"
         }
+
 
     ]
 
@@ -189,7 +246,7 @@
         if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
         } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
-            alert("Atenção... a próxima é a ultima questão!")
+            // alert("Atenção... a próxima é a ultima questão!")
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
         } else {
             finalizarJogo()
@@ -259,7 +316,7 @@
         const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
 
         if (porcentagemFinalDeAcertos <= 0.3) {
-            textoParaMensagemFinal = "Parece que você não estudou..."
+            textoParaMensagemFinal = "Parece que você não é um fã do Messi..."
             classComCoresParaMensagemFinal = "text-danger-with-bg"
         }
         else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
@@ -267,7 +324,7 @@
             classComCoresParaMensagemFinal = "text-warning-with-bg"
         }
         else if (porcentagemFinalDeAcertos >= 0.9) {
-            textoParaMensagemFinal = "Uau, parabéns!"
+            textoParaMensagemFinal = "Uau, parabéns, Você é um verdadeiro Messizete!"
             classComCoresParaMensagemFinal = "text-success-with-bg"
         }
 

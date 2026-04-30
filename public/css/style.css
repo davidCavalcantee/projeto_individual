@@ -72,11 +72,8 @@
 
     .container span {
         font-size: 40px;
-        background: linear-gradient(100deg,#1e186d, #330a61, #4294c4,#8e96af);
-        -webkit-background-clip: text;  
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        -webkit-text-stroke: 1px rgb(0, 0, 0);
+        color: rgb(243, 236, 236);
+
     }
 
     .estatisticas {

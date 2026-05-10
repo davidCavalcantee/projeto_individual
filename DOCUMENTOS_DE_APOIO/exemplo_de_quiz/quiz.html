@@ -8,26 +8,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
+<body id="fundoOriginal">
 <body onload="onloadEsconder()">
-    <div id="pontuacaoEJogo">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
-
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
-            <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
-                <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
-                <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
-            </div>
-            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
-                <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
-                    <span id="spanPontuacaoFinal">***</span>
-                </span>
-                <span id="msgFinal" class="width-fit-content">***</span>
-            </div>
+    <header>
+        <img src="../../public/assets/icones/logoMessi.png">
+        <div class="menu">
+            <li><a href="login.html" class="botaoCadastroLogin">Login</a></li>
+            <li><a href="cadastro.html" class="botaoCadastroLogin">Cadastro</a></li>
         </div>
+    </header>
 
+    <div id="pontuacaoEJogo">
+        <div class="cardQuiz" id="cardQuiz">
+            <div class="mensagemQuiz">Seja bem vindo ao Quiz do Messi</div>
+            <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+        </div>
         <div id="jogo" class="width-fit-content flex-colunar border-secondary">
-
+            <div id="messi">
             <div id="infoQuestao" class="padding-8">
                 <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
                     questões.</span>
@@ -63,14 +60,32 @@
             <div id="botoes" class="flex-colunar padding-8">
                 <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
                 <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                 <button onclick="finalizarJogo()" id="btnConcluir" disabled>Finalizar Quiz</button> 
                 <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
             </div>
-
+            </div>
+            <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
+                <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
+                    <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
+                    <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
+                </div>
+                <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
+                    <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
+                        <span id="spanPontuacaoFinal">***</span>
+                    </span>
+                    <span id="msgFinal" class="width-fit-content">***</span>
+                </div>
+            </div>
         </div>
     </div>
+    <footer>
+        <div class="footer">
+            <a>Uma Homenagem para Lionel Messi - O melhor jogador da História - "THE GOAT"</a>
+            <span> © 2026 - David Lima Cavalcante</span>
+        </div>
+    </footer>
 </body>
-
+</body>
 </html>
 <script>
     const listaDeQuestoes = [
@@ -168,7 +183,7 @@
     let certas = 0
     let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
-    // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
+    let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
 
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
@@ -176,17 +191,17 @@
     }
 
     function iniciarQuiz() {
-        document.getElementById('pontuacao').style.display = "flex"
+        document.getElementById('pontuacao').style.display = "none"
         document.getElementById('jogo').style.display = "flex"
         document.getElementById('btnIniciarQuiz').style.display = "none"
-
+        document.getElementById('cardQuiz').style.display = "none"
         document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
         preencherHTMLcomQuestaoAtual(0)
 
         btnSubmeter.disabled = false
         btnProx.disabled = true
-        // btnConcluir.disabled = true
+        btnConcluir.disabled = true
         btnTentarNovamente.disabled = true
     }
 
@@ -246,7 +261,7 @@
         if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
         } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
-            // alert("Atenção... a próxima é a ultima questão!")
+             alert("Atenção... a próxima é a ultima questão!")
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
         } else {
             finalizarJogo()
@@ -328,18 +343,20 @@
             classComCoresParaMensagemFinal = "text-success-with-bg"
         }
 
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
+        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
 
+         setTimeout(function () {
+                        window.location = "../../public/dashboard.html";
+                    }, 750); 
+        // document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
+        // document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
+        // document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
 
-        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal) 
-        document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
-
-        document.getElementById('jogo').classList.add("text-new-gray") 
+        // document.getElementById('jogo').classList.add("text-new-gray")
 
         btnProx.disabled = true
         btnSubmeter.disabled = true
-        // btnConcluir.disabled = true
+        btnConcluir.disabled = false
         btnTentarNovamente.disabled = false
 
     }

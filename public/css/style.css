@@ -374,3 +374,57 @@
         /* margin-top: 2.3%; */
         /* position: absolute; */
     }
+    .mensagemDashboard{
+        justify-self: flex-start;
+        padding: 2%;
+        /* justify-content: flex-start; */
+    }
+    .mensagemDashboard h1{
+        color: white;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    .kpis{
+        justify-content: center;
+        padding: 2%;
+        display: flex;
+    }
+     .dashCards{
+        display: flex;
+        flex-direction: row;
+        gap: 200px;
+    }
+    .kpisCard{
+        border-radius: 20px;
+        display: flex;
+        background-image: linear-gradient(to right ,#08184b,#101835);
+        border: 1px solid #0a1f64;
+        width: 250px;
+        height: 130px;
+        flex-direction: column;
+        align-items: center;
+        padding: 2%;
+    }
+    .kpisCard span{
+        color: white;
+        font-weight: bold;
+        font-size: 40px;
+    }
+    .kpisCard a{
+        color: gray;
+        font-style: italic;
+    }
+    .fundoGrafico{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        justify-self: center;
+        background-color: #08184b;
+        width: 100%;
+        height: 600px;
+    }
+    .grafico{
+        justify-self: center;
+        width: 1000px;
+        height: 500px;
+        /* background-color: red; */
+    }

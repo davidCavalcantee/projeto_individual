@@ -17,7 +17,6 @@
     --new-black: #212427;
     --new-white: #E8E8E8;
 }
-
 body {
     color: var(--new-black);
     background-color: var(--new-white);
@@ -25,6 +24,7 @@ body {
 }
 
 button {
+    background-color: #0762C8;
     font-family: monospace;
     font-weight: bold;
 }

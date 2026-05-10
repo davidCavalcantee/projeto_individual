@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="assets/icones/logoMessi.png">
+
+        <div class="menu">
+            <li><a href="">Quiz</a></li>
+            <li><a href="index.html">Home</a></li>
+        </div>
+    </header>
+    <div class="mensagemDashboard">
+        <h1>Olá, Seja Bem Vindo</h1>
+    </div>
+
+    <div class="kpis">
+        <div class="dashCards">
+            <div class="kpisCard">
+                <a>Atualmente você é o</a><br>
+                <span>8º</span> <br>
+                <a>no ranking de acertos </a>
+            </div>
+            <div class="kpisCard ">
+                <a>Sua última tentativa teve</a><br>
+                <span>50%</span> <br>
+                <a>de acerto </a>
+            </div>
+            <div class="kpisCard">
+                <a>Sua melhor tentativa foi de </a><br>
+                <span>66%</span> <br>
+                <a>de acerto</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="fundoGrafico">
+
+    <div class="grafico">
+        <canvas id="myChart" style="position: relative; height: 50vh; width: 50vw;">
+    </div>
+
+    </div>
+
+    <footer>
+        <div class="footer">
+            <a>Uma Homenagem para Lionel Messi - O melhor jogador da História - "THE GOAT"</a>
+            <span> © 2026 - David Lima Cavalcante</span>
+        </div>
+    </footer>
+</body>
+
+</html>
+<script>
+
+    const ctx = document.getElementById('myChart');
+
+
+const data = {
+        labels: ['Jogador 1', 'Jogador 2', 'Jogador 3', 'Jogador 4', 'Jogador 5', 'Jogador 6', 'Jogador 7'],
+        datasets: [{
+            label: 'Ranking de Acertos (%)',
+            barPercentage: 0.5,
+            barThickness: 40,
+            maxBarThickness: 50,
+            minBarLength: 2,
+            data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+            backgroundColor: [
+                'red',
+                'purple',
+                'pink',
+                'yellow',
+                'blue',
+                'silver',
+                'green',
+                // 'orange',
+                // 'gray'
+            ]
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    ticks:{
+                        color: 'white'
+                    },
+                    beginAtZero: true
+                },
+                x:{
+                    ticks:{
+                      color: 'white'  
+                    },
+                    beginAtZero: true
+                },
+                
+            },
+            plugins:{
+                    legend: {
+                        labels:{
+                            color:'white'
+                        }
+                    }
+                }
+        }
+    };
+
+    new Chart(ctx, config);
+
+ 
+
+</script>

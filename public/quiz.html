@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exemplo - Quiz</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/styleQuiz.css">
+    <!-- <link rel="icon" href=""> -->
 </head>
 
 <body id="fundoOriginal">
 <body onload="onloadEsconder()">
     <header>
-        <img src="../../public/assets/icones/logoMessi.png">
+        <img src="assets/icones/logoMessi.png">
         <div class="menu">
             <li><a href="login.html" class="botaoCadastroLogin">Login</a></li>
             <li><a href="cadastro.html" class="botaoCadastroLogin">Cadastro</a></li>
@@ -180,7 +181,7 @@
     let numeroDaQuestaoAtual = 0
     let pontuacaoFinal = 0
     let tentativaIncorreta = 0
-    let certas = 0
+    let acertos = 0
     let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
     let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
@@ -200,7 +201,7 @@
         preencherHTMLcomQuestaoAtual(0)
 
         btnSubmeter.disabled = false
-        btnProx.disabled = true
+        btnProx.disabled = false
         btnConcluir.disabled = true
         btnTentarNovamente.disabled = true
     }
@@ -265,6 +266,7 @@
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
         } else {
             finalizarJogo()
+
         }
         limparCoresBackgroundOpcoes()
     }
@@ -294,8 +296,8 @@
             if (option.checked === true && option.value === respostaQuestaoAtual) {
                 document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
                 pontuacaoFinal++
-                certas++
-                document.getElementById("spanCertas").innerHTML = certas
+                acertos++
+                document.getElementById("spanCertas").innerHTML = acertos
                 numeroDaQuestaoAtual++
             } else if (option.checked && option.value !== respostaQuestaoAtual) {
                 const wrongLabelId = option.labels[0].id
@@ -326,28 +328,66 @@
     }
 
     function finalizarJogo() {
-        let textoParaMensagemFinal = null
-        let classComCoresParaMensagemFinal = null
-        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
+        // let textoParaMensagemFinal = null
+        // let classComCoresParaMensagemFinal = null
+        // const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
 
-        if (porcentagemFinalDeAcertos <= 0.3) {
-            textoParaMensagemFinal = "Parece que você não é um fã do Messi..."
-            classComCoresParaMensagemFinal = "text-danger-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
-            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-            classComCoresParaMensagemFinal = "text-warning-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos >= 0.9) {
-            textoParaMensagemFinal = "Uau, parabéns, Você é um verdadeiro Messizete!"
-            classComCoresParaMensagemFinal = "text-success-with-bg"
-        }
+        // if (porcentagemFinalDeAcertos <= 0.3) {
+        //     textoParaMensagemFinal = "Parece que você não é um fã do Messi..."
+        //     classComCoresParaMensagemFinal = "text-danger-with-bg"
+        // }
+        // else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
+        //     textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
+        //     classComCoresParaMensagemFinal = "text-warning-with-bg"
+        // }
+        // else if (porcentagemFinalDeAcertos >= 0.9) {
+        //     textoParaMensagemFinal = "Uau, parabéns, Você é um verdadeiro Messizete!"
+        //     classComCoresParaMensagemFinal = "text-success-with-bg"
+        // }
 
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
+        // textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
+        let fkUsuario = sessionStorage.ID_USUARIO;
 
-         setTimeout(function () {
-                        window.location = "../../public/dashboard.html";
-                    }, 750); 
+         fetch("/quiz/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        acertosServer: acertos,
+        fkUsuarioServer: fkUsuario,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+        //   cardErro.style.display = "block";
+
+          alert('Aparentemente é pra funcionar')
+
+          setTimeout(() => {
+            window.location = "dashboard.html";
+          }, "10000");
+
+        //   limparFormulario();
+        //   finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar inserir os dados do quiz!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        // finalizarAguardar();
+      });
+
+    return false;
+    
+        //  setTimeout(function () {
+        //                 window.location = "../../public/dashboard.html";
+        //             }, 750); 
         // document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
         // document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
         // document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal

@@ -374,14 +374,13 @@
         /* margin-top: 2.3%; */
         /* position: absolute; */
     }
-    .mensagemDashboard{
+    #mensagemDashboard{
         justify-self: flex-start;
         padding: 2%;
         /* justify-content: flex-start; */
-    }
-    .mensagemDashboard h1{
         color: white;
         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 50px;
     }
     .kpis{
         justify-content: center;

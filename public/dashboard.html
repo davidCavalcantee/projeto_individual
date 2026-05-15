@@ -9,17 +9,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body onload="obterDadosGrafico()">
     <header>
         <img src="assets/icones/logoMessi.png">
 
         <div class="menu">
             <li><a href="quiz.html">Quiz</a></li>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html" onclick="sessionStorage.clear()">Sair</a></li>
         </div>
     </header>
-    <div class="mensagemDashboard">
-        <h1>Olá, Seja Bem Vindo</h1>
+    <div id="mensagemDashboard">
     </div>
 
     <div class="kpis">
@@ -29,14 +28,14 @@
                 <span>8º</span> <br>
                 <a>no ranking de acertos </a>
             </div>
-            <div class="kpisCard ">
+            <div class="kpisCard" onload="buscarKpiTentativaRecente()">
                 <a>Sua última tentativa teve</a><br>
-                <span>50%</span> <br>
+                <span id="kpiTentativaRecente">50%</span> <br>
                 <a>de acerto </a>
             </div>
-            <div class="kpisCard">
+            <div class="kpisCard" onload="buscarKpiPorcentagem()">
                 <a>Sua melhor tentativa foi de </a><br>
-                <span>66%</span> <br>
+                <span id="kpiMelhorTentativa">66%</span> <br>
                 <a>de acerto</a>
             </div>
         </div>
@@ -45,7 +44,7 @@
     <div class="fundoGrafico">
 
     <div class="grafico">
-        <canvas id="myChart" style="position: relative; height: 50vh; width: 50vw;">
+        <canvas id="myChartCanvas" style="position: relative; height: 50vh; width: 50vw;">
     </div>
 
     </div>
@@ -60,37 +59,142 @@
 
 </html>
 <script>
+    buscarKpiPorcentagem();
+    buscarKpiTentativaRecente();
 
     const ctx = document.getElementById('myChart');
 
+    mensagemDashboard.innerHTML = `Olá, ${sessionStorage.NOME_USUARIO}`
+    
+// const data = {
+//         labels: ['Jogador 1', 'Jogador 2', 'Jogador 3', 'Jogador 4', 'Jogador 5', 'Jogador 6', 'Jogador 7'],
+//         datasets: [{
+//             label: 'Ranking de Acertos (%)',
+//             barPercentage: 0.5,
+//             barThickness: 40,
+//             maxBarThickness: 50,
+//             minBarLength: 2,
+//             data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+//             backgroundColor: [
+//                 'red',
+//                 'purple',
+//                 'pink',
+//                 'yellow',
+//                 'blue',
+//                 'silver',
+//                 'green',
+//                 // 'orange',
+//                 // 'gray'
+//             ]
+//         }]
+//     };
 
-const data = {
-        labels: ['Jogador 1', 'Jogador 2', 'Jogador 3', 'Jogador 4', 'Jogador 5', 'Jogador 6', 'Jogador 7'],
-        datasets: [{
-            label: 'Ranking de Acertos (%)',
-            barPercentage: 0.5,
+//     const config = {
+//         type: 'bar',
+//         data: data,
+//         options: {
+//             scales: {
+//                 y: {
+//                     ticks:{
+//                         color: 'white'
+//                     },
+//                     beginAtZero: true
+//                 },
+//                 x:{
+//                     ticks:{
+//                       color: 'white'  
+//                     },
+//                     beginAtZero: true
+//                 },
+                
+//             },
+//             plugins:{
+//                     legend: {
+//                         labels:{
+//                             color:'white'
+//                         }
+//                     }
+//                 }
+//         }
+//     };
+
+//     new Chart(ctx, config);
+
+   function obterDadosGrafico(){
+    let idUsuario = sessionStorage.ID_USUARIO;
+    fetch(`/dashboard/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, idUsuario);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    
+    function plotarGrafico(resposta, idUsuario) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Ranking de Acertos',
+                data: [],
+               barPercentage: 0.5,
             barThickness: 40,
             maxBarThickness: 50,
             minBarLength: 2,
-            data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-            backgroundColor: [
-                'red',
-                'purple',
-                'pink',
-                'yellow',
-                'blue',
+             backgroundColor: [
+                'brown',
                 'silver',
-                'green',
+                'gold',
+                // 'yellow',
+                // 'blue',
+                // 'silver',
+                // 'green',
                 // 'orange',
                 // 'gray'
             ]
-        }]
-    };
+            },]
+        };
 
-    const config = {
-        type: 'bar',
-        data: data,
-        options: {
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.nome);
+            dados.datasets[0].data.push(registro.acertos);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            options: {
             scales: {
                 y: {
                     ticks:{
@@ -114,10 +218,72 @@ const data = {
                     }
                 }
         }
-    };
+        };
 
-    new Chart(ctx, config);
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`myChartCanvas`),
+            config
+        );
 
- 
+        // setTimeout(() => atualizarGrafico(idUsuario, dados, myChart), 2000);
+    }
+
+
+    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+    // buscando a última medida inserida em tabela contendo as capturas, 
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+
+
+    function buscarKpiPorcentagem(){
+    let kpiMelhorTentativa = document.getElementById(`kpiMelhorTentativa`);
+        let idUsuario = sessionStorage.ID_USUARIO;
+
+         fetch(`/dashboard/porcentagem/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    kpiMelhorTentativa.innerHTML = resposta[0].porcentagemDeAcertos
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function buscarKpiTentativaRecente(){
+     
+        let kpiTentativaRecente = document.getElementById(`kpiTentativaRecente`);
+        let idUsuario = sessionStorage.ID_USUARIO;
+
+         fetch(`/dashboard/porcentagemRecente/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    kpiTentativaRecente.innerHTML = resposta[0].porcentagemDeAcertos
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    
+    }
+    
+
+
 
 </script>

@@ -14,8 +14,7 @@
     <header>
         <img src="assets/icones/logoMessi.png">
         <div class="menu">
-            <li><a href="login.html" class="botaoCadastroLogin">Login</a></li>
-            <li><a href="cadastro.html" class="botaoCadastroLogin">Cadastro</a></li>
+            <li><a href="dashboard.html" class="botaoCadastroLogin" id="botaoDashboard">Dashboard</a></li>
         </div>
     </header>
 
@@ -196,6 +195,7 @@
         document.getElementById('jogo').style.display = "flex"
         document.getElementById('btnIniciarQuiz').style.display = "none"
         document.getElementById('cardQuiz').style.display = "none"
+        document.getElementById('botaoDashboard').style.display = "none"
         document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
         preencherHTMLcomQuestaoAtual(0)

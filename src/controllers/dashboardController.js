@@ -48,6 +48,22 @@ function buscarPorcentagemRecentePorUsuario(req, res) {
   });
 }
 
+function buscarKpiRanking(req, res) {
+  var idUsuario = req.params.idUsuario;
+
+  dashboardModel.buscarKpiRanking(idUsuario).then((resultado) => {
+    if (resultado.length > 0) {
+      res.status(200).json(resultado);
+    } else {
+      res.status(204).json([]);
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar os quiz: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
+
 
 function cadastrar(req, res) {
   var acertos = req.body.acertos;
@@ -76,6 +92,7 @@ function cadastrar(req, res) {
 }
 
 module.exports = {
+  buscarKpiRanking,
   buscarPorcentagemRecentePorUsuario,
   buscarPorcentagemPorUsuario,
   buscarQuizPorUsuario,

@@ -23,19 +23,19 @@
 
     <div class="kpis">
         <div class="dashCards">
-            <div class="kpisCard">
+            <div class="kpisCard" onload="buscarKpiRanking()">
                 <a>Atualmente você é o</a><br>
-                <span>8º</span> <br>
+                <span id="kpiRanking">0º</span> <br>
                 <a>no ranking de acertos </a>
             </div>
             <div class="kpisCard" onload="buscarKpiTentativaRecente()">
                 <a>Sua última tentativa teve</a><br>
-                <span id="kpiTentativaRecente">50%</span> <br>
+                <span id="kpiTentativaRecente">0%</span> <br>
                 <a>de acerto </a>
             </div>
             <div class="kpisCard" onload="buscarKpiPorcentagem()">
                 <a>Sua melhor tentativa foi de </a><br>
-                <span id="kpiMelhorTentativa">66%</span> <br>
+                <span id="kpiMelhorTentativa">0%</span> <br>
                 <a>de acerto</a>
             </div>
         </div>
@@ -61,6 +61,7 @@
 <script>
     buscarKpiPorcentagem();
     buscarKpiTentativaRecente();
+    buscarKpiRanking();
 
     const ctx = document.getElementById('myChart');
 
@@ -269,9 +270,9 @@
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
-
+                   
                     kpiTentativaRecente.innerHTML = resposta[0].porcentagemDeAcertos
-
+                
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -282,7 +283,28 @@
             });
     
     }
-    
+
+    function buscarKpiRanking(){
+    let kpiRanking = document.getElementById(`kpiRanking`);
+        let idUsuario = sessionStorage.ID_USUARIO;
+
+         fetch(`/dashboard/ranking/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    kpiRanking.innerHTML = (Number(resposta[0].posicao) + 1) + 'º' ;
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
 
 
 

@@ -18,7 +18,7 @@
     --new-white: #E8E8E8;
 }
 #fundoOriginal{
-    background-color:#0a1f64;
+    background-image: url(../assets/imagens/messiFundoLoginCadastro.jpeg);
 }
 body {
     margin: 0;

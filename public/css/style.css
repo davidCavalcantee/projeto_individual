@@ -32,7 +32,6 @@
         margin-right: 5%;
 
     }
-
     .menu li {
         display: inline-block;
     }
@@ -43,7 +42,6 @@
         font-weight: bold;
         font-size: 20px;
     }
-
     .botaoCadastroLogin {
         background-color: #1818b6;
         border-radius: 10px;
@@ -127,7 +125,7 @@
         font-weight: bold;
     }
     .conquistasCard a{
-        color: gray;
+        color: rgb(255, 255, 255);
         font-style: italic;
     }
     .iconeConquista{
@@ -176,7 +174,7 @@
         font-size: 20px;
     }
     .cardClubes i {
-        color: gray;
+        color: rgb(255, 255, 255);
         font-size: 15px;
     }
     .iconeClubes{
@@ -230,8 +228,13 @@
     .containerImagemBallonDor span{
         color: white;
         font-weight: bold;
-        font-size: 40px;
+        font-size: 30px;
         margin-bottom: 5%;
+        border-radius: 10px;
+        background-color: black;
+        opacity: 70%;
+        padding: 2%;
+        
         
     }
     .mensagem{
@@ -280,18 +283,19 @@
         color: #4294c4;
     }
     .containerLoginCadastro{
-        margin-top: 80px;
+        margin-top: 130px; 
         display: flex;
         border: 2px solid aqua;
         background-color: #06123a;
-        justify-self: center;
+         /* justify-self: center;  */
         border-radius: 20px;
         padding: 2%;
         width:500px;
         flex-direction: column;
-        /* justify-content: center; */
+         justify-content: center; 
         align-items: center;
         gap: 10px;
+        /* height: 300px; */
     }
     .containerLoginCadastro input{
         justify-self: center;
@@ -318,14 +322,14 @@
         color: white;
     }
     .fundoLoginCadastro{
-        margin-top: 40px;
-        padding: 5%;
+         /* padding: 5%;   */
         display: flex;
-        align-items: center;
+         align-items: start; 
         justify-content: center;
-        background-color:#0a1f64;
-        height: 350px;
-        margin-bottom: 200px;
+        background-image: url(../assets/imagens/messiFundoLoginCadastro.jpeg);
+        /* background-color:#0a1f64; */
+         height: 850px; 
+        /* margin-bottom: 200px; */
     }
     .containerLoginCadastro div{
         color: red;
@@ -354,8 +358,23 @@
         color: aqua;
         font-size: 23px;
     }
-     .teste{
+     .biografiaContainer{
         display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        /* align-items: center; */
+    }
+     .linhaCalendario{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        /* justify-content: center; */
+        /* align-items: center; */
+    }
+     .linhaBiografia{
+        gap: 10px;
+        display: flex;
+        flex-direction: row;
         /* justify-content: center; */
         /* align-items: center; */
     }

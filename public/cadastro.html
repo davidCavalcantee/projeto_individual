@@ -14,7 +14,6 @@
         <img src="assets/icones/logoMessi.png">
 
         <div class="menu">
-            <li><a href="">Quiz</a></li>
             <li><a href="index.html">Home</a></li>
         </div>
     </header>
@@ -23,8 +22,6 @@
             <h1>Criar Conta</h1>
             <input type="text" id="input_nome" placeholder="*Digite seu nome">
             <div id="erro_nome"></div>
-            <input type="text" id="input_cpf" placeholder="*Digite seu CPF - sem pontos e traços">
-            <div id="erro_cpf"></div>
             <input type="text" id="input_email" placeholder="*Digite seu email - example@hotmail.com">
             <div id="erro_email"></div>
             <input type="password" id="input_senha" placeholder="*Digite sua senha">
@@ -51,7 +48,6 @@
         let numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
         let caracteresInvalidosNome = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '@', '-', '_', '=', '-', '+', ',', '.', '{}', '#', '%', '*', '/', '|', '[]', '()', ';', '?', 'º', 'ª'];
         let nome = input_nome.value;
-        let cpf = input_cpf.value;
         let email = input_email.value;
         let senha = input_senha.value;
         let confirmarSenha = input_confirmar_senha.value;
@@ -70,26 +66,6 @@
             }
         } else {
             erro_nome.innerHTML = `* Nome inválido`
-        }
-        //validação cpf
-        if (cpf.length == 11) {
-            for (let i = 0; i < cpf.length; i++) {
-                if (!numeros.includes(cpf[i])) {
-                    cpfInvalido++
-                }
-            }
-            if (cpfInvalido > 0) {
-                erro_cpf.innerHTML = `* CPF inválido`;
-                invalido++
-            } else {
-                erro_cpf.innerHTML = '';
-            }
-
-        } else if (cpf.length !== 11) {
-            erro_cpf.innerHTML = `* CPF inválido`;
-            invalido++
-        } else {
-            erro_cpf.innerHTML = '';
         }
         //validação email
         if (!email.endsWith('.com') || !email.includes('@')) {

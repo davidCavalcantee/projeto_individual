@@ -2,7 +2,9 @@ var database = require("../database/config");
 
 function buscarQuizPorUsuario(idUsuario) {
 
-  var instrucaoSql = `select  id, MAX(acertos) as acertos,nome  from quiz join usuario on usuario.id = fkUsuario GROUP BY id order by acertos desc;`;
+  var instrucaoSql = `select  id, MAX(acertos) as acertos,nome  
+  from quiz join usuario on usuario.id = fkUsuario 
+  GROUP BY id order by acertos desc;`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

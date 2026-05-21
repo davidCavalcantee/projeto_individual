@@ -7,6 +7,10 @@ router.get("/:idUsuario", function (req, res) {
   dashboardController.buscarQuizPorUsuario(req, res);
 });
 
+router.get("/graficoTentativas/:idUsuario", function (req, res) {
+  dashboardController.buscarTentativasPorUsuario(req, res);
+});
+
 router.get("/porcentagem/:idUsuario", function (req, res) {
   dashboardController.buscarPorcentagemPorUsuario(req, res);
 });

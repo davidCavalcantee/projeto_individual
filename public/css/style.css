@@ -429,12 +429,13 @@
         font-size: 40px;
     }
     .kpisCard a{
-        color: gray;
+        color: white;
         font-style: italic;
     }
     .fundoGrafico{
         display: flex;
         align-items: center;
+        gap: 10px;
         justify-content: center;
         justify-self: center;
         background-color: #08184b;
@@ -442,8 +443,8 @@
         height: 600px;
     }
     .grafico{
-        justify-self: center;
-        width: 1000px;
+        /* justify-self: center; */
+        width: 600px;
         height: 500px;
         /* background-color: red; */
     }

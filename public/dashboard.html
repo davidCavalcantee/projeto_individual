@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="obterDadosGrafico()">
+<body onload="obterDadosGrafico(),obterDadosGrafico2()" >
     <header>
         <img src="assets/icones/logoMessi.png">
 
@@ -45,6 +45,9 @@
 
     <div class="grafico">
         <canvas id="myChartCanvas" style="position: relative; height: 50vh; width: 50vw;">
+    </div>
+    <div class="grafico">
+        <canvas id="myChartCanvas2" style="position: relative; height: 50vh; width: 50vw;">
     </div>
 
     </div>
@@ -106,9 +109,12 @@
             maxBarThickness: 50,
             minBarLength: 2,
              backgroundColor: [
-                'brown',
-                'silver',
-                'gold',
+                'blue',
+                'white'
+                // 'gold',
+                // 'brown',
+                // 'silver',
+                // 'gold',
                 // 'yellow',
                 // 'blue',
                 // 'silver',
@@ -171,6 +177,120 @@
         // Adicionando gráfico criado em div na tela
         let myChart = new Chart(
             document.getElementById(`myChartCanvas`),
+            config
+        );
+
+        // setTimeout(() => atualizarGrafico(idUsuario, dados, myChart), 2000);
+    }
+   function obterDadosGrafico2(){
+    let idUsuario = sessionStorage.ID_USUARIO;
+    fetch(`/dashboard/graficoTentativas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    // resposta.reverse();
+
+                    plotarGrafico2(resposta, idUsuario);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    
+    function plotarGrafico2(resposta, idUsuario) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+
+       
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Evolução de Acertos',
+                data: [],
+             barPercentage: 0.5,
+             barThickness: 40,
+             maxBarThickness: 50,
+             minBarLength: 2,
+              backgroundColor: [
+                 'blue',
+                 'aqua'
+            //     'gold',
+            //     'brown',
+            //     'silver',
+            //     'gold',
+            //     // 'yellow',
+            //     // 'blue',
+            //     // 'silver',
+            //     // 'green',
+            //     // 'orange',
+            //     // 'gray'
+             ]
+            },]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+             labels.push(`Tentativa ${i + 1}`);
+            dados.datasets[0].data.push(registro.acertos);
+            // console.log(labels)
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            options: {
+            scales: {
+                y: {
+                    ticks:{
+                        color: 'white'
+                    },
+                    beginAtZero: true
+                },
+                x:{
+                    ticks:{
+                      color: 'white'  
+                    },
+                    beginAtZero: true
+                },
+                
+            },
+            plugins:{
+                    legend: {
+                        labels:{
+                            color:'white'
+                        }
+                    }
+                }
+        }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`myChartCanvas2`),
             config
         );
 

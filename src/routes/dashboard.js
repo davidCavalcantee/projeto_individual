@@ -22,6 +22,9 @@ router.get("/porcentagemRecente/:idUsuario", function (req, res) {
 router.get("/ranking/:idUsuario", function (req, res) {
   dashboardController.buscarKpiRanking(req, res);
 });
+router.get("/media/:idUsuario", function (req, res) {
+  dashboardController.buscarMediaPorUsuario(req, res);
+});
 
 router.post("/cadastrar", function (req, res) {
   dashboardController.cadastrar(req, res);

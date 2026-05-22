@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="obterDadosGrafico(),obterDadosGrafico2()" >
+<body onload="obterDadosGrafico(),obterDadosGrafico2()">
     <header>
         <img src="assets/icones/logoMessi.png">
 
@@ -38,17 +38,22 @@
                 <span id="kpiMelhorTentativa">0%</span> <br>
                 <a>de acerto</a>
             </div>
+            <div class="kpisCard" onload="buscarKpiMedia()">
+                <a>Sua média de Acertos foi de </a><br>
+                <span id="kpiMedia">0</span> <br>
+                <a>Acertos por Tentativa</a>
+            </div>
         </div>
     </div>
 
     <div class="fundoGrafico">
 
-    <div class="grafico">
-        <canvas id="myChartCanvas" style="position: relative; height: 50vh; width: 50vw;">
-    </div>
-    <div class="grafico">
-        <canvas id="myChartCanvas2" style="position: relative; height: 50vh; width: 50vw;">
-    </div>
+        <div class="grafico">
+            <canvas id="myChartCanvas" style="position: relative; height: 50vh; width: 50vw;">
+        </div>
+        <div class="grafico">
+            <canvas id="myChartCanvas2" style="position: relative; height: 50vh; width: 50vw;">
+        </div>
 
     </div>
 
@@ -65,15 +70,16 @@
     buscarKpiPorcentagem();
     buscarKpiTentativaRecente();
     buscarKpiRanking();
+    buscarKpiMedia();
 
     const ctx = document.getElementById('myChart');
 
     mensagemDashboard.innerHTML = `Olá, ${sessionStorage.NOME_USUARIO}`
-    
 
-   function obterDadosGrafico(){
-    let idUsuario = sessionStorage.ID_USUARIO;
-    fetch(`/dashboard/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+
+    function obterDadosGrafico() {
+        let idUsuario = sessionStorage.ID_USUARIO;
+        fetch(`/dashboard/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -90,7 +96,7 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
-    
+
     function plotarGrafico(resposta, idUsuario) {
 
         console.log('iniciando plotagem do gráfico...');
@@ -104,24 +110,24 @@
             datasets: [{
                 label: 'Ranking de Acertos',
                 data: [],
-               barPercentage: 0.5,
-            barThickness: 40,
-            maxBarThickness: 50,
-            minBarLength: 2,
-             backgroundColor: [
-                'blue',
-                'white'
-                // 'gold',
-                // 'brown',
-                // 'silver',
-                // 'gold',
-                // 'yellow',
-                // 'blue',
-                // 'silver',
-                // 'green',
-                // 'orange',
-                // 'gray'
-            ]
+                barPercentage: 0.5,
+                barThickness: 40,
+                maxBarThickness: 50,
+                minBarLength: 2,
+                backgroundColor: [
+                    'blue',
+                    'white'
+                    // 'gold',
+                    // 'brown',
+                    // 'silver',
+                    // 'gold',
+                    // 'yellow',
+                    // 'blue',
+                    // 'silver',
+                    // 'green',
+                    // 'orange',
+                    // 'gray'
+                ]
             },]
         };
 
@@ -136,6 +142,7 @@
             dados.datasets[0].data.push(registro.acertos);
         }
 
+
         console.log('----------------------------------------------')
         console.log('O gráfico será plotado com os respectivos valores:')
         console.log('Labels:')
@@ -149,29 +156,29 @@
             type: 'bar',
             data: dados,
             options: {
-            scales: {
-                y: {
-                    ticks:{
-                        color: 'white'
+                scales: {
+                    y: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        beginAtZero: true
                     },
-                    beginAtZero: true
-                },
-                x:{
-                    ticks:{
-                      color: 'white'  
+                    x: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        beginAtZero: true
                     },
-                    beginAtZero: true
+
                 },
-                
-            },
-            plugins:{
+                plugins: {
                     legend: {
-                        labels:{
-                            color:'white'
+                        labels: {
+                            color: 'white'
                         }
                     }
                 }
-        }
+            }
         };
 
         // Adicionando gráfico criado em div na tela
@@ -182,9 +189,9 @@
 
         // setTimeout(() => atualizarGrafico(idUsuario, dados, myChart), 2000);
     }
-   function obterDadosGrafico2(){
-    let idUsuario = sessionStorage.ID_USUARIO;
-    fetch(`/dashboard/graficoTentativas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+    function obterDadosGrafico2() {
+        let idUsuario = sessionStorage.ID_USUARIO;
+        fetch(`/dashboard/graficoTentativas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -201,14 +208,14 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
-    
+
     function plotarGrafico2(resposta, idUsuario) {
 
         console.log('iniciando plotagem do gráfico...');
 
         // Criando estrutura para plotar gráfico - labels
 
-       
+
         let labels = [];
 
         // Criando estrutura para plotar gráfico - dados
@@ -217,24 +224,24 @@
             datasets: [{
                 label: 'Evolução de Acertos',
                 data: [],
-             barPercentage: 0.5,
-             barThickness: 40,
-             maxBarThickness: 50,
-             minBarLength: 2,
-              backgroundColor: [
-                 'blue',
-                 'aqua'
-            //     'gold',
-            //     'brown',
-            //     'silver',
-            //     'gold',
-            //     // 'yellow',
-            //     // 'blue',
-            //     // 'silver',
-            //     // 'green',
-            //     // 'orange',
-            //     // 'gray'
-             ]
+                barPercentage: 0.5,
+                barThickness: 40,
+                maxBarThickness: 50,
+                minBarLength: 2,
+                backgroundColor: [
+                    'blue',
+                    'aqua'
+                    //     'gold',
+                    //     'brown',
+                    //     'silver',
+                    //     'gold',
+                    //     // 'yellow',
+                    //     // 'blue',
+                    //     // 'silver',
+                    //     // 'green',
+                    //     // 'orange',
+                    //     // 'gray'
+                ]
             },]
         };
 
@@ -243,9 +250,11 @@
         console.log(resposta)
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
+
+
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
-             labels.push(`Tentativa ${i + 1}`);
+            labels.push(`Tentativa ${i + 1}`);
             dados.datasets[0].data.push(registro.acertos);
             // console.log(labels)
         }
@@ -263,29 +272,29 @@
             type: 'bar',
             data: dados,
             options: {
-            scales: {
-                y: {
-                    ticks:{
-                        color: 'white'
+                scales: {
+                    y: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        beginAtZero: true
                     },
-                    beginAtZero: true
-                },
-                x:{
-                    ticks:{
-                      color: 'white'  
+                    x: {
+                        ticks: {
+                            color: 'white'
+                        },
+                        beginAtZero: true
                     },
-                    beginAtZero: true
+
                 },
-                
-            },
-            plugins:{
+                plugins: {
                     legend: {
-                        labels:{
-                            color:'white'
+                        labels: {
+                            color: 'white'
                         }
                     }
                 }
-        }
+            }
         };
 
         // Adicionando gráfico criado em div na tela
@@ -305,11 +314,11 @@
     //     Para ajustar o "select", ajuste o comando sql em src/models
 
 
-    function buscarKpiPorcentagem(){
-    let kpiMelhorTentativa = document.getElementById(`kpiMelhorTentativa`);
+    function buscarKpiPorcentagem() {
+        let kpiMelhorTentativa = document.getElementById(`kpiMelhorTentativa`);
         let idUsuario = sessionStorage.ID_USUARIO;
 
-         fetch(`/dashboard/porcentagem/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/dashboard/porcentagem/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -327,19 +336,19 @@
             });
     }
 
-    function buscarKpiTentativaRecente(){
-     
+    function buscarKpiTentativaRecente() {
+
         let kpiTentativaRecente = document.getElementById(`kpiTentativaRecente`);
         let idUsuario = sessionStorage.ID_USUARIO;
 
-         fetch(`/dashboard/porcentagemRecente/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/dashboard/porcentagemRecente/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
-                   
+
                     kpiTentativaRecente.innerHTML = resposta[0].porcentagemDeAcertos
-                
+
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -348,20 +357,53 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-    
+
     }
 
-    function buscarKpiRanking(){
-    let kpiRanking = document.getElementById(`kpiRanking`);
+    function buscarKpiRanking() {
+        let kpiRanking = document.getElementById(`kpiRanking`);
         let idUsuario = sessionStorage.ID_USUARIO;
 
-         fetch(`/dashboard/ranking/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/dashboard/ranking/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    kpiRanking.innerHTML = (Number(resposta[0].posicao) + 1) + 'º' ;
+                    kpiRanking.innerHTML = (Number(resposta[0].posicao) + 1) + 'º';
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    function buscarKpiMedia() {
+        let kpiMedia = document.getElementById(`kpiMedia`);
+        let idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch(`/dashboard/media/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    let dadosMedia = [];
+                    let soma = 0;
+
+                    for (i = 0; i < resposta.length; i++) {
+                        dadosMedia.push(resposta[i].acertos);
+                    }
+                    for (let j = 0; j < dadosMedia.length; j++){
+                            soma += Number(dadosMedia[j]);
+                        }
+                        
+                    let media = soma / dadosMedia.length
+                    kpiMedia.innerHTML = media.toFixed(2);
+                    
 
                 });
             } else {

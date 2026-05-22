@@ -11,7 +11,14 @@ function buscarQuizPorUsuario(idUsuario) {
 }
 function buscarTentativasPorUsuario(idUsuario) {
 
-  var instrucaoSql = `select  idQuiz, acertos as acertos,nome  from quiz join usuario on usuario.id = fkUsuario where id = ${idUsuario} HAVING acertos order by idQuiz;`;
+  var instrucaoSql = `select  idQuiz, acertos,nome  from quiz join usuario on usuario.id = fkUsuario where id = ${idUsuario} HAVING acertos order by idQuiz;`;
+
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+function buscarMediaPorUsuario(idUsuario) {
+
+  var instrucaoSql = `select  idQuiz, acertos,nome  from quiz join usuario on usuario.id = fkUsuario where id = ${idUsuario} HAVING acertos order by idQuiz;`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -63,6 +70,7 @@ function cadastrar(idUsuario, acertos) {
 
 
 module.exports = {
+  buscarMediaPorUsuario,
   buscarTentativasPorUsuario,
   buscarKpiRanking,
   buscarPorcentagemRecentePorUsuario,

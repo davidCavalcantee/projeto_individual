@@ -30,6 +30,21 @@ function buscarTentativasPorUsuario(req, res) {
     res.status(500).json(erro.sqlMessage);
   });
 }
+function buscarMediaPorUsuario(req, res) {
+  var idUsuario = req.params.idUsuario;
+
+  dashboardModel.buscarMediaPorUsuario(idUsuario).then((resultado) => {
+    if (resultado.length > 0) {
+      res.status(200).json(resultado);
+    } else {
+      res.status(204).json([]);
+    }
+  }).catch(function (erro) {
+    console.log(erro);
+    console.log("Houve um erro ao buscar os quiz: ", erro.sqlMessage);
+    res.status(500).json(erro.sqlMessage);
+  });
+}
 
 function buscarPorcentagemPorUsuario(req, res) {
   var idUsuario = req.params.idUsuario;
@@ -107,6 +122,7 @@ function cadastrar(req, res) {
 }
 
 module.exports = {
+  buscarMediaPorUsuario,
   buscarTentativasPorUsuario,
   buscarKpiRanking,
   buscarPorcentagemRecentePorUsuario,

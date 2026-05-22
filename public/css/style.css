@@ -13,7 +13,7 @@
         justify-content: space-between;
         align-items: center;
         background-color: #06123a;
-        border-bottom: 1px solid #1818b6;
+        border-bottom: 2px solid #c8c8e4;
         width: cover;
     }
 
@@ -29,7 +29,7 @@
         justify-content: flex-end;
         flex-direction: row;
         gap: 30px;
-        margin-right: 5%;
+         margin-right: 25px
 
     }
     .menu li {
@@ -45,7 +45,7 @@
     .botaoCadastroLogin {
         background-color: #1818b6;
         border-radius: 10px;
-        padding: 20px;
+        padding: 10px;
     }
 
     .container {
@@ -61,6 +61,7 @@
 
     .container h1 {
         font-size: 100px;
+        margin-top: 400px;
         font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         background: linear-gradient(100deg,#1e186d, #330a61, #4294c4,#8e96af);
         -webkit-background-clip: text;  
@@ -76,6 +77,8 @@
     }
 
     .estatisticas {
+        border-top: 2px solid white;
+        border-bottom: 2px solid white;
         background-color: #06123a;
         display: flex;
         justify-content: space-evenly;
@@ -261,11 +264,12 @@
         font-size: 20px;
     }
     footer{
+        
         display: flex;
         justify-content: center;
         /* align-items: end; */
         background-color: #06123a;
-        border-top: 1px solid #1818b6;
+        border-top: 2px solid white;
         width: cover;
         height: 80px;
     }
@@ -300,6 +304,8 @@
     }
     .containerLoginCadastro input{
         justify-self: center;
+        display: flex;
+        text-align: center;
         width: 400px;
         border-radius: 20px;
         height: 40px;
@@ -410,7 +416,7 @@
      .dashCards{
         display: flex;
         flex-direction: row;
-        gap: 200px;
+        gap: 85px;
     }
     .kpisCard{
         border-radius: 20px;

@@ -34,8 +34,11 @@ function buscarPorcentagemPorUsuario(idUsuario) {
 
 function buscarPorcentagemRecentePorUsuario(idUsuario) {
 
-  var instrucaoSql = `select idQuiz,nome, CONCAT(ROUND(acertos*100/10, 0),'%') as 'porcentagemDeAcertos' 
-from quiz right join usuario on quiz.fkUsuario = usuario.id where fkUsuario = ${idUsuario} group by idQuiz  order by idQuiz DESC LIMIT 1   ;`;
+  var instrucaoSql = `select idQuiz,nome, CONCAT(ROUND(acertos*100/10, 0),'%')
+                      as 'porcentagemDeAcertos' 
+                      from quiz right join usuario 
+                      on quiz.fkUsuario = usuario.id where fkUsuario = ${idUsuario} 
+                      group by idQuiz  order by idQuiz DESC LIMIT 1   ;`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

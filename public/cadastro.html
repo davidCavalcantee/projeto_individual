@@ -75,7 +75,7 @@
             erro_email.innerHTML = '';
         }
         //validação senha
-        if (senha !== '' || confirmarSenha !== '') {
+        if (senha !== '' && confirmarSenha !== '' && senha.length >= 8 ) {
             if (senha != confirmarSenha) {
                 erro_confirmar_senha.innerHTML = `* Senhas não conferem`;
                 invalido++
@@ -84,6 +84,7 @@
             }
         } else {
             erro_senha.innerHTML = `* Senha Inválida`;
+            invalido ++
         }
 
         if(invalido == 0){
